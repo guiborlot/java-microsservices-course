@@ -22,6 +22,7 @@ public class AccountAggregate extends AggregateRoot {
     public AccountAggregate(OpenAccountCommand command){
         raiseEvent(AccountOpenedEvent.builder()
                 .id(command.getId())
+                .accountHolder(command.getAccountHolder())
                 .createdDate(new Date())
                 .accountType(command.getAccountType())
                 .openingBalance(command.getOpeningBalance()).build());
@@ -48,7 +49,7 @@ public class AccountAggregate extends AggregateRoot {
 
     public void apply(FoundsDepositedEvent event){
         this.id = event.getId();
-        this.balance -= event.getAmount();
+        this.balance += event.getAmount();
     }
 
     public void withdrawFounds(double amount){

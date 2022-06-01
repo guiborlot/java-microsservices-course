@@ -8,6 +8,7 @@ import lombok.experimental.SuperBuilder;
 
 @Data
 @SuperBuilder
+@NoArgsConstructor
 public class AccountClosedEvent extends BaseEvent {
 
 }
